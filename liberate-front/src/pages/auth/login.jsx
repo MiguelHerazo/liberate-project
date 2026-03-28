@@ -114,7 +114,7 @@ export default function Login() {
           {/* Separador */}
           <div className="flex items-center gap-3 my-6">
             <div className="flex-1 h-px bg-gray-100" />
-            <span className="text-xs text-gray-400">¿No tenés cuenta?</span>
+            <span className="text-xs text-gray-400">¿No tienes una cuenta?</span>
             <div className="flex-1 h-px bg-gray-100" />
           </div>
 
