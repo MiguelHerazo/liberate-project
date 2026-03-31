@@ -1,3 +1,4 @@
+import { Link} from "react-router-dom";
 import { useState } from "react";
 
 export default function Login() {
@@ -97,9 +98,7 @@ export default function Login() {
 
           {/* Olvidaste contraseña */}
           <div className="text-right mb-6">
-            <a href="/forgot-password" className="text-xs text-[#3B6D11] hover:underline">
-              ¿Olvidaste tu contraseña?
-            </a>
+            <Link to="/forgot-password">¿Olvidaste tu contraseña?</Link>
           </div>
 
           {/* Botón */}
@@ -121,9 +120,9 @@ export default function Login() {
           {/* Registro */}
           <p className="text-center text-sm text-gray-500">
             ¿Eres una empresa?{" "}
-            <a href="/register" className="text-[#3B6D11] font-medium hover:underline">
+            <Link to="/register" className="text-[#3B6D11] font-medium hover:underline">
               Registra tu organización
-            </a>
+            </Link>
           </p>
         </div>
       </div>

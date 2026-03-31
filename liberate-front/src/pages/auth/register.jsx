@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Register() {
   const [step, setStep] = useState(1);
@@ -216,10 +217,10 @@ export default function Register() {
               </button>
 
               <p className="text-center text-sm text-gray-500 mt-4">
-                ¿Ya tenés cuenta?{" "}
-                <a href="/login" className="text-[#3B6D11] font-medium hover:underline">
-                  Iniciá sesión
-                </a>
+                ¿Ya tienes una cuenta?{" "}
+                <Link to="/login" className="text-[#3B6D11] font-medium hover:underline">
+                  Inicia sesión
+                </Link>
               </p>
             </>
           )}

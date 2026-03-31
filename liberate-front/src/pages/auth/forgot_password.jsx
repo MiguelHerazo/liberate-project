@@ -35,6 +35,7 @@
  */
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function ForgotPassword() {
   // Estado principal: controla si ya se envió el enlace
@@ -120,7 +121,7 @@ export default function ForgotPassword() {
         </div>
 
         <h1 className="text-[#EAF3DE] text-2xl font-medium leading-relaxed mb-4">
-          Recuperá el acceso a tu cuenta
+          Recupera el acceso a tu cuenta
         </h1>
         <p className="text-[#97C459] text-sm leading-relaxed">
           Te enviamos un enlace a tu correo corporativo para restablecer tu contraseña de forma segura.
@@ -180,9 +181,9 @@ export default function ForgotPassword() {
               {/* Link de regreso al login */}
               <p className="text-center text-sm text-gray-500 mt-4">
                 ¿Recordaste tu contraseña?{" "}
-                <a href="/login" className="text-[#3B6D11] font-medium hover:underline">
-                  Inicia sesión
-                </a>
+                <Link to="/login" className="text-[#3B6D11] font-medium hover:underline">
+                  Iniciar sesión
+                </Link>
               </p>
             </>
           )}
@@ -213,9 +214,9 @@ export default function ForgotPassword() {
 
               <p className="text-center text-sm text-gray-500 mt-4">
                 Volver a{" "}
-                <a href="/login" className="text-[#3B6D11] font-medium hover:underline">
-                  iniciar sesión
-                </a>
+                <Link to="/login" className="text-[#3B6D11] font-medium hover:underline">
+                  Iniciar sesión
+                </Link>
               </p>
             </>
           )}
