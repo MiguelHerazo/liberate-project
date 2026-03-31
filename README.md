@@ -141,12 +141,6 @@ El frontend ya consume o espera los siguientes endpoints. El backend debe implem
 
 ---
 
-## 📌 Convenciones del equipo
-
-- Ramas: `main` (producción) · `dev` (desarrollo) · `feature/nombre-hu` (por historia)
-- Commits: usar prefijos `feat:`, `fix:`, `docs:`, `style:`
-- Cada componente debe tener comentarios explicando su HU, criterios de aceptación y TODOs para el backend
-
 ---
 
 ## 📄 Documentación adicional
