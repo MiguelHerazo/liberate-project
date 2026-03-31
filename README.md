@@ -141,10 +141,3 @@ El frontend ya consume o espera los siguientes endpoints. El backend debe implem
 
 ---
 
----
-
-## 📄 Documentación adicional
-
-- [Informe técnico v1.0](./docs/Informe_Técnico_Liberate.pdf)
-- [Historias de usuario](./docs/Historias_de_Usuario.xlsx)
-- [Plantilla de estimación Poker](./docs/Plantilla_Poker_Estructurada.xlsx)
