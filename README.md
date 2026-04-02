@@ -10,9 +10,9 @@ Plataforma digital orientada al fortalecimiento del bienestar mental de los trab
 
 | Integrante | Rol |
 |---|---|
-| Sebastián Villa Zuleta | Base de Datos |
+| Sebastián Villa Zuleta | Frontend |
 | Daniel Henao Metaute | Backend |
-| Miguel Andrés Herazo Domínguez | Frontend |
+| Miguel Andrés Herazo Domínguez | Base de datos |
 
 ---
 
@@ -31,27 +31,30 @@ Plataforma digital orientada al fortalecimiento del bienestar mental de los trab
 
 ```
 liberate-project/
-├── liberate-front/          ← Frontend React
+├── liberate-front/               ← Frontend React
 │   └── src/
-│       ├── assets/          ← Imágenes, íconos
+│       ├── assets/               ← Imágenes, íconos
 │       ├── components/
-│       │   ├── ui/          ← Botones, inputs, cards reutilizables
-│       │   └── layout/      ← Navbar, sidebar, footer
+│       │   ├── ui/               ← Botones, inputs, cards reutilizables
+│       │   └── layout/           ← Navbar, sidebar, footer
 │       ├── pages/
 │       │   ├── auth/
-│       │   │   ├── Login.jsx
-│       │   │   ├── Register.jsx
-│       │   │   └── ForgotPassword.jsx
+│       │   │   ├── Login.jsx           ← HU-04
+│       │   │   ├── Register.jsx        ← HU-01, HU-02, HU-03
+│       │   │   └── ForgotPassword.jsx  ← HU-05
 │       │   ├── dashboard/
+│       │   │   └── Dashboard.jsx       ← Hub principal por rol
 │       │   ├── stress/
+│       │   │   └── StressTest.jsx      ← HU-06
 │       │   └── appointments/
+│       │       └── BookAppointment.jsx ← HU-07
 │       ├── services/
-│       │   └── api.js       ← Configuración de axios y llamadas al backend
+│       │   └── api.js            ← Configuración de axios y llamadas al backend
 │       ├── context/
-│       │   └── AuthContext.jsx
+│       │   └── AuthContext.jsx   ← Estado global del usuario logueado (pendiente)
 │       └── routes/
-│           └── AppRoutes.jsx
-├── liberate-back/           ← Backend Node.js (pendiente)
+│           └── AppRoutes.jsx     ← Definición de rutas con React Router
+├── liberate-back/                ← Backend Node.js (en desarrollo)
 └── README.md
 ```
 
@@ -95,49 +98,84 @@ PORT=3000
 
 ---
 
+## 🗺️ Rutas del frontend
+
+| Ruta | Componente | Descripción |
+|---|---|---|
+| `/` | — | Redirige a `/login` |
+| `/login` | `Login.jsx` | Inicio de sesión con correo corporativo |
+| `/register` | `Register.jsx` | Registro de organización y dominio |
+| `/forgot-password` | `ForgotPassword.jsx` | Recuperación de contraseña |
+| `/dashboard` | `Dashboard.jsx` | Hub principal — vista por rol |
+| `/stress-test` | `StressTest.jsx` | Test de evaluación emocional |
+| `/appointments` | `BookAppointment.jsx` | Agendamiento de cita con psicólogo |
+
+---
+
 ## 📋 Historias de usuario — Sprint 1
 
-| ID | Historia | Estado |
-|---|---|---|
-| HU-01 | Registrar organización | ✅ Frontend listo |
-| HU-02 | Registrar dominio corporativo | ✅ Frontend listo |
-| HU-03 | Asignar correos corporativos | ✅ Frontend listo |
-| HU-04 | Iniciar sesión con correo corporativo | ✅ Frontend listo |
-| HU-05 | Recuperar contraseña | ✅ Frontend listo |
-| HU-06 | Llenar test de estrés | 🔄 En progreso |
-| HU-07 | Agendar cita con psicólogo | 🔄 En progreso |
+| ID | Historia | Frontend | Backend | DB |
+|---|---|---|---|---|
+| HU-01 | Registrar organización | ✅ Listo | ⏳ Pendiente | ⏳ Pendiente |
+| HU-02 | Registrar dominio corporativo | ✅ Listo | ⏳ Pendiente | ⏳ Pendiente |
+| HU-03 | Asignar correos corporativos | ✅ Listo | ⏳ Pendiente | ⏳ Pendiente |
+| HU-04 | Iniciar sesión con correo corporativo | ✅ Listo | ⏳ Pendiente | ⏳ Pendiente |
+| HU-05 | Recuperar contraseña | ✅ Listo | ⏳ Pendiente | ⏳ Pendiente |
+| HU-06 | Llenar test de estrés | ✅ Listo | ⏳ Pendiente | ⏳ Pendiente |
+| HU-07 | Agendar cita con psicólogo | ✅ Listo | ⏳ Pendiente | ⏳ Pendiente |
 
 ---
 
 ## 🔌 Endpoints esperados (backend)
 
-El frontend ya consume o espera los siguientes endpoints. El backend debe implementarlos respetando estos contratos:
+El frontend ya tiene los `TODO` en cada archivo `.jsx` con el detalle exacto. Resumen:
 
 ### Autenticación
 
-| Método | Endpoint | Body | Descripción |
+| Método | Endpoint | Body | HU |
 |---|---|---|---|
-| POST | `/api/auth/register` | `{ orgName, nit, sector, adminName, adminEmail, password }` | HU-01: Registrar organización |
-| POST | `/api/org/domain` | `{ domain, employeeCount }` | HU-02/03: Registrar dominio |
-| POST | `/api/auth/login` | `{ email, password }` | HU-04: Iniciar sesión |
-| POST | `/api/auth/forgot-password` | `{ email }` | HU-05: Recuperar contraseña |
+| POST | `/api/auth/register` | `{ orgName, nit, sector, adminName, adminEmail, password }` | HU-01 |
+| POST | `/api/org/domain` | `{ domain, employeeCount }` | HU-02/03 |
+| POST | `/api/auth/login` | `{ email, password }` | HU-04 |
+| POST | `/api/auth/forgot-password` | `{ email }` | HU-05 |
+
+### Test de estrés
+
+| Método | Endpoint | Body | HU |
+|---|---|---|---|
+| POST | `/api/stress-test/submit` | `{ answers, score, percentage, level }` | HU-06 |
+
+### Citas
+
+| Método | Endpoint | Params | HU |
+|---|---|---|---|
+| GET | `/api/psychologists` | — | HU-07 |
+| GET | `/api/appointments/slots` | `?date=YYYY-MM-DD&psychologistId=ID` | HU-07 |
+| POST | `/api/appointments` | `{ psychologistId, date, time }` | HU-07 |
 
 ### Respuestas esperadas
 
 - Login exitoso → `{ token, user: { id, name, email, role } }`
 - Error de credenciales → HTTP 401 `{ error: "Credenciales incorrectas" }`
-- Correo no encontrado → HTTP 200 (por seguridad, no revelar si existe)
-
-> 📌 Cada archivo `.jsx` del frontend tiene comentarios `TODO` con el detalle exacto del endpoint que necesita.
+- Slot ya reservado → HTTP 409 `{ error: "El horario ya no está disponible" }`
+- Forgot password → HTTP 200 siempre (no revelar si el correo existe)
 
 ---
 
 ## 🎨 Guía de estilos
 
-- Paleta principal: verdes suaves (`#3B6D11`, `#97C459`, `#EAF3DE`)
-- Fondo general: blanco
+- Paleta principal: verdes suaves — `#3B6D11` (primario), `#97C459` (acento), `#EAF3DE` (fondo suave)
+- Fondo de páginas: `#f9fafb` (gris muy claro)
+- Fondo de cards: blanco con borde `#e5e7eb`
 - Tipografía: sistema por defecto (sans-serif)
-- Componentes: Tailwind CSS 4 con clases utilitarias
+- Bordes redondeados: `rounded-xl` para cards, `rounded-lg` para inputs y botones
+- Framework de estilos: Tailwind CSS 4
 
 ---
 
+## 📌 Convenciones del equipo
+
+- **Documentación:** cada componente tiene comentarios con la HU, criterios de aceptación y TODOs para el backend
+- **TODOs:** buscar `// TODO` en cualquier archivo `.jsx` para ver qué falta conectar con el back
+
+---
