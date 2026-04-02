@@ -10,9 +10,9 @@ Plataforma digital orientada al fortalecimiento del bienestar mental de los trab
 
 | Integrante | Rol |
 |---|---|
-| Sebastián Villa Zuleta | Frontend |
+| Sebastián Villa Zuleta | Base de datos |
 | Daniel Henao Metaute | Backend |
-| Miguel Andrés Herazo Domínguez | Base de datos |
+| Miguel Andrés Herazo Domínguez | Frontend |
 
 ---
 
