@@ -392,7 +392,7 @@ export default function StressTest() {
               {/* Error si no respondió — Escenario 2 */}
               {errors[question.id] && (
                 <p className="text-xs text-red-500 mt-2">
-                  Por favor respondé esta pregunta.
+                  Por favor responde esta pregunta.
                 </p>
               )}
             </div>

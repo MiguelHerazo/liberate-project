@@ -1,7 +1,38 @@
-import { Link} from "react-router-dom";
+/**
+ * Login.jsx
+ * -------------------------------------------------
+ * HU-04: Iniciar sesión con correo corporativo
+ *
+ * Criterios de aceptación:
+ *   Escenario 1 - Inicio de sesión exitoso:
+ *     Dado que el empleado está en la pantalla de login,
+ *     Cuando ingresa correo y contraseña correctos,
+ *     Entonces el sistema permite el acceso a la plataforma.
+ *
+ *   Escenario 2 - Credenciales incorrectas:
+ *     Dado que el empleado introduce datos erróneos,
+ *     Cuando intenta iniciar sesión,
+ *     Entonces el sistema muestra un mensaje de error.
+ *
+ *   Escenario 3 - Campos vacíos:
+ *     Dado que el empleado no completa los campos,
+ *     Cuando presiona iniciar sesión,
+ *     Entonces el sistema solicita completar los campos.
+ *
+ * TODO para el backend (compañero):
+ *   - Endpoint: POST /api/auth/login
+ *   - Body: { email: string, password: string }
+ *   - Respuesta exitosa (200): { token, user: { id, name, email, role } }
+ *   - Respuesta error (401): { error: "Credenciales incorrectas" }
+ * -------------------------------------------------
+ */
+
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -9,17 +40,24 @@ export default function Login() {
 
   const handleLogin = async () => {
     setError("");
+
+    // Validación de campos vacíos — Escenario 3
     if (!email || !password) {
-      setError("Por favor completa todos los campos.");
+      setError("Por favor completá todos los campos.");
       return;
     }
+
     setLoading(true);
     try {
       // TODO: reemplazar con la URL real del backend cuando esté lista
       // const response = await axios.post("/api/auth/login", { email, password });
-      // guardar token, redirigir al dashboard
+      // const { token, user } = response.data;
+      // localStorage.setItem("token", token);
+      // localStorage.setItem("user", JSON.stringify(user));
       console.log("Login con:", email, password);
+      navigate("/dashboard");
     } catch (err) {
+      // Escenario 2 — credenciales incorrectas
       setError("Correo o contraseña incorrectos.");
     } finally {
       setLoading(false);
@@ -28,8 +66,10 @@ export default function Login() {
 
   return (
     <div className="flex min-h-screen">
+
       {/* Panel izquierdo */}
       <div className="hidden md:flex w-[42%] bg-[#3B6D11] flex-col justify-center px-12 py-16">
+
         {/* Logo */}
         <div className="flex items-center gap-3 mb-12">
           <div className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center">
@@ -42,12 +82,11 @@ export default function Login() {
           <span className="text-[#EAF3DE] text-lg font-medium tracking-widest">LIBERATE</span>
         </div>
 
-        {/* Texto */}
         <h1 className="text-[#EAF3DE] text-3xl font-medium leading-relaxed mb-4">
           Bienestar mental para tu equipo de trabajo
         </h1>
         <p className="text-[#97C459] text-sm leading-relaxed">
-          Monitorea el estado emocional de tus colaboradores, detecta riesgos a tiempo
+          Monitoreá el estado emocional de tus colaboradores, detectá riesgos a tiempo
           y conectalos con apoyo profesional.
         </p>
 
@@ -63,9 +102,9 @@ export default function Login() {
       <div className="flex flex-1 items-center justify-center px-8 py-16 bg-white">
         <div className="w-full max-w-sm">
           <h2 className="text-2xl font-medium text-gray-900 mb-1">Bienvenido de nuevo</h2>
-          <p className="text-sm text-gray-500 mb-8">Ingresa con tu correo corporativo</p>
+          <p className="text-sm text-gray-500 mb-8">Ingresá con tu correo corporativo</p>
 
-          {/* Error */}
+          {/* Error — Escenario 2 y 3 */}
           {error && (
             <div className="mb-4 text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg px-4 py-2">
               {error}
@@ -80,6 +119,7 @@ export default function Login() {
               placeholder="tu@empresa.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleLogin()}
               className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-lg bg-gray-50 text-gray-900 outline-none focus:border-[#3B6D11] transition-colors"
             />
           </div>
@@ -92,16 +132,19 @@ export default function Login() {
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleLogin()}
               className="w-full px-4 py-2.5 text-sm border border-gray-200 rounded-lg bg-gray-50 text-gray-900 outline-none focus:border-[#3B6D11] transition-colors"
             />
           </div>
 
           {/* Olvidaste contraseña */}
           <div className="text-right mb-6">
-            <Link to="/forgot-password">¿Olvidaste tu contraseña?</Link>
+            <Link to="/forgot_password" className="text-xs text-[#3B6D11] hover:underline">
+              ¿Olvidaste tu contraseña?
+            </Link>
           </div>
 
-          {/* Botón */}
+          {/* Botón de login — Escenario 1 */}
           <button
             onClick={handleLogin}
             disabled={loading}
@@ -113,15 +156,15 @@ export default function Login() {
           {/* Separador */}
           <div className="flex items-center gap-3 my-6">
             <div className="flex-1 h-px bg-gray-100" />
-            <span className="text-xs text-gray-400">¿No tienes una cuenta?</span>
+            <span className="text-xs text-gray-400">¿No tenés cuenta?</span>
             <div className="flex-1 h-px bg-gray-100" />
           </div>
 
           {/* Registro */}
           <p className="text-center text-sm text-gray-500">
-            ¿Eres una empresa?{" "}
+            ¿Sos una empresa?{" "}
             <Link to="/register" className="text-[#3B6D11] font-medium hover:underline">
-              Registra tu organización
+              Registrá tu organización
             </Link>
           </p>
         </div>
